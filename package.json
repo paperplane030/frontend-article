@@ -1,0 +1,32 @@
+{
+  "name": "frontend-article",
+  "version": "1.0.0",
+  "description": "每天早上把前端熱門文章清單發到 Discord",
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "preview": "tsx src/index.ts --dry-run",
+    "typecheck": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paperplane030/frontend-article.git"
+  },
+  "bugs": {
+    "url": "https://github.com/paperplane030/frontend-article/issues"
+  },
+  "homepage": "https://github.com/paperplane030/frontend-article#readme",
+  "dependencies": {
+    "fast-xml-parser": "^4.5.7",
+    "opencc-js": "^1.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3"
+  },
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  }
+}

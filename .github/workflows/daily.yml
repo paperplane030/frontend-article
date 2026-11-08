@@ -1,0 +1,43 @@
+name: 每日前端文章
+
+on:
+  schedule:
+    # GitHub 的 cron 用 UTC。23:50 UTC = 台灣 07:50。
+    # GitHub 排程尖峰時常延遲 5～15 分鐘，提早 10 分鐘排，實際約 8 點送達。
+    - cron: '50 23 * * *'
+  # 可以在 Actions 頁面手動執行
+  workflow_dispatch:
+
+permissions:
+  contents: write # 要把去重紀錄 data/history.json 推回 repo
+
+concurrency:
+  group: daily
+  cancel-in-progress: false
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: 抓文章並發到 Discord
+        run: npm start
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+
+      - name: 儲存已發送紀錄
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/history.json
+          git diff --cached --quiet || git commit -m "chore: 更新已發送紀錄 $(TZ=Asia/Taipei date +%F)"
+          git push
