@@ -2,21 +2,21 @@
 
 export const config = {
   /** 每天最多發幾篇 */
-  maxTotal: 20,
+  maxTotal: 8,
 
   /** 中英文配額（加起來等於 maxTotal）。某一邊不夠時，另一邊會補上。 */
   quota: {
-    zh: 14,
-    en: 6,
+    zh: 7,
+    en: 1,
   },
 
   juejin: {
     /** 掘金「前端」分類 ID */
     categoryId: '6809637767543259144',
-    /** 中文配額裡，最多幾篇來自熱榜（熱門優先），其餘從最近 24 小時新文章挑互動最多的（最新為輔） */
-    maxFromHotRank: 10,
+    /** 中文配額裡，最多幾篇來自熱榜（熱門優先），其餘從最近 newWithinHours 小時的新文章挑互動最多的（最新為輔） */
+    maxFromHotRank: 5,
     /** 「新文章」往回看幾小時 */
-    newWithinHours: 24,
+    newWithinHours: 48,
   },
 
   devto: {

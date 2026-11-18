@@ -7,7 +7,7 @@ const byHot = (a: Article, b: Article) => b.hot - a.hot;
 /**
  * 從所有候選文章挑出今天要發的清單：
  * - 去掉以前發過的、同一天重複的
- * - 中文：熱榜優先（最多 maxFromHotRank 篇），剩下的用 24 小時內互動最多的新文章補
+ * - 中文：熱榜優先（最多 maxFromHotRank 篇），剩下的用 newWithinHours 內互動最多的新文章補
  * - 英文：官方消息優先，其餘用 dev.to 熱門文章補
  * - 某一邊不夠時，由另一邊補滿 maxTotal
  */
